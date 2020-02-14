@@ -50,11 +50,14 @@
         android:layout_height="72dp"
         android:layout_marginBottom="76dp"
         android:contentDescription="@string/btn_play"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_media_play" />
+        app:srcCompat="@android:drawable/ic_media_play">
+        <requestFocus />
+    </ImageButton>
 
     <TextView
         android:id="@+id/lbl_play"
