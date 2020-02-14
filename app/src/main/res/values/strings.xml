@@ -3,4 +3,7 @@
     <string name="the_game">The Game!</string>
     <string name="btn_play">Play</string>
     <string name="lbl_your_username">Your Username</string>
+
+    
+    <string name="err_required">Required</string>
 </resources>
