@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Stone Paper Scissors</string>
+    <string name="the_game">The Game!</string>
 </resources>
