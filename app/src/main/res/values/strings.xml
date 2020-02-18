@@ -1,9 +1,24 @@
 <resources>
     <string name="app_name">Stone Paper Scissors</string>
     <string name="the_game">The Game!</string>
-    <string name="btn_play">Play</string>
-    <string name="lbl_your_username">Your Username</string>
 
+    <string name="btn_play">Play</string>
+    <string name="btn_paper">Paper</string>
+    <string name="btn_stone">Stone</string>
+    <string name="btn_scissors">Scissors</string>
+    <string name="btn_back">Back</string>
+
+    <string name="lbl_todo">TODO!</string>
+    <string name="lbl_your_username">Your Username</string>
+    <string name="lbl_you">You</string>
+    <string name="lbl_the_machine">The machine</string>
+    <string name="lbl_paper">Paper</string>
+    <string name="lbl_stone">Stone</string>
+    <string name="lbl_scissors">Scissors</string>
+    <string name="lbl_vs">vs.</string>
+    <string name="lbl_win">You Win!</string>
+    <string name="lbl_draw">Draw!</string>
+    <string name="lbl_lose">You Lose!</string>
     
     <string name="err_required">Required</string>
 </resources>

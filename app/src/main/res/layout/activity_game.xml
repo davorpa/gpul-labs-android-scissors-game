@@ -6,4 +6,141 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/grp_machine"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="lbl_the_machine,img_machine" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/grp_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="lbl_you,txt_username,img_player,grp_machine" />
+
+    <TextView
+        android:id="@+id/lbl_you"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_you"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/img_player"
+        app:layout_constraintTop_toTopOf="@+id/lbl_the_machine" />
+
+    <TextView
+        android:id="@+id/txt_username"
+        android:layout_width="150dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/img_player"
+        app:layout_constraintStart_toStartOf="@+id/lbl_you"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_you" />
+
+    <TextView
+        android:id="@+id/lbl_the_machine"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/lbl_the_machine"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/img_machine"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_player"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_machine" />
+
+    <ImageView
+        android:id="@+id/img_machine"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_the_machine" />
+
+    <TextView
+        android:id="@+id/lbl_vs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/lbl_vs"
+        app:layout_constraintEnd_toStartOf="@+id/img_machine"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toEndOf="@+id/img_player"
+        app:layout_constraintTop_toTopOf="@+id/img_machine" />
+
+    <Button
+        android:id="@+id/btn_stone"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:onClick="onStoneButton"
+        android:text="@string/btn_stone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_paper" />
+
+    <Button
+        android:id="@+id/btn_paper"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="496dp"
+        android:onClick="onPaperButton"
+        android:text="@string/btn_paper"
+        app:layout_constraintEnd_toStartOf="@+id/btn_scissors"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toEndOf="@+id/btn_stone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_scissors"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:onClick="onScissorsButton"
+        android:text="@string/btn_scissors"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_paper" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="112dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp"
+        android:drawableStart="@drawable/ic_exit_to_app_black_24dp"
+        android:onClick="onBackButton"
+        android:text="@string/btn_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_paper"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/lbl_match_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/lbl_draw" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
