@@ -89,6 +89,7 @@
         android:focusableInTouchMode="true"
         android:hint="@string/lbl_your_username"
         android:inputType="textNoSuggestions|textPersonName|textCapCharacters"
+        android:importantForAutofill="no"
         android:lines="1"
         android:linksClickable="false"
         android:longClickable="true"
