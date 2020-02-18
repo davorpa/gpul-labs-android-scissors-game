@@ -51,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Navigate to other activity
-        // TODO: Navigate to GameActivity.class
-        final Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        final Intent intent = new Intent(MainActivity.this, GameActivity.class);
         intent.putExtra(MainActivity.EXTRA_USERNAME, username);
         startActivity(intent);
     }
