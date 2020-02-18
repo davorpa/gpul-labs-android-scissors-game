@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         if (username == null || username.trim().isEmpty()) {
             txt_username.setError(getString(R.string.err_required));
             txt_username.requestFocus();
+            //Open device keyboard
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(txt_username, InputMethodManager.SHOW_IMPLICIT);
             return;
         }
 

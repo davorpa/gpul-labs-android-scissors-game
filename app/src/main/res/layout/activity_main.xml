@@ -86,6 +86,7 @@
         android:layout_marginTop="312dp"
         android:drawableStart="@drawable/ic_person_black_24dp"
         android:ems="10"
+        android:focusableInTouchMode="true"
         android:hint="@string/lbl_your_username"
         android:inputType="textNoSuggestions|textPersonName|textCapCharacters"
         android:lines="1"
