@@ -55,8 +55,11 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
+        android:contentDescription="@string/lbl_thinking"
+        android:scaleType="centerInside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/img_machine" />
+        app:layout_constraintTop_toTopOf="@+id/img_machine"
+        tools:src="@drawable/icon_quest" />
 
     <ImageView
         android:id="@+id/img_machine"
@@ -64,8 +67,10 @@
         android:layout_height="150dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_the_machine" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_the_machine"
+        tools:src="@drawable/icon_quest" />
 
     <TextView
         android:id="@+id/lbl_vs"
