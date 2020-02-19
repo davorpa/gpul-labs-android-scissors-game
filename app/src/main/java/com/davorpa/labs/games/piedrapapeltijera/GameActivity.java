@@ -36,26 +36,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
     /**
-     * Método que se ejecuta al pulsar el botón Stone
+     * Método que se ejecuta al pulsar el botón Stone|Paper|Scissors
      * @param view the button instance that fires the event
      */
-    public void onStoneButton(final View view) {
-        Toast.makeText(this, R.string.lbl_todo, Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * Método que se ejecuta al pulsar el botón Paper
-     * @param view the button instance that fires the event
-     */
-    public void onPaperButton(final View view) {
-        Toast.makeText(this, R.string.lbl_todo, Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * Método que se ejecuta al pulsar el botón Scissors
-     * @param view the button instance that fires the event
-     */
-    public void onScissorsButton(final View view) {
+    public void onPlayButton(final View view) {
         Toast.makeText(this, R.string.lbl_todo, Toast.LENGTH_LONG).show();
     }
 

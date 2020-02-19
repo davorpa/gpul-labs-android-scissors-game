@@ -88,7 +88,7 @@
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:onClick="onStoneButton"
+        android:onClick="onPlayButton"
         android:text="@string/btn_stone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_paper" />
@@ -98,7 +98,7 @@
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="496dp"
-        android:onClick="onPaperButton"
+        android:onClick="onPlayButton"
         android:text="@string/btn_paper"
         app:layout_constraintEnd_toStartOf="@+id/btn_scissors"
         app:layout_constraintHorizontal_bias="0.511"
@@ -110,7 +110,7 @@
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:onClick="onScissorsButton"
+        android:onClick="onPlayButton"
         android:text="@string/btn_scissors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_paper" />
