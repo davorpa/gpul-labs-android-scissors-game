@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Piedra Papel Tijeras</string>
+    <string name="btn_back">Volver</string>
+    <string name="btn_paper">Papel</string>
+    <string name="btn_play">Jugar</string>
+    <string name="btn_scissors">Tijeras</string>
+    <string name="btn_stone">Piedra</string>
+    <string name="err_required">Requerido</string>
+    <string name="lbl_draw">¡Empate!</string>
+    <string name="lbl_loose">¡Has Perdido!</string>
+    <string name="lbl_paper">Papel</string>
+    <string name="lbl_scissors">Tijeras</string>
+    <string name="lbl_stone">Piedra</string>
+    <string name="lbl_the_machine">La máquina</string>
+    <string name="lbl_thinking">Pensando…</string>
+    <string name="lbl_vs">vs.</string>
+    <string name="lbl_win">¡Has ganado!</string>
+    <string name="lbl_you">Tú</string>
+    <string name="lbl_your_username">Tu nombre de usuario</string>
+    <string name="the_game">¡¡El juego!!</string>
+</resources>
