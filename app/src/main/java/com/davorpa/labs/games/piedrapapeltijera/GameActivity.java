@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -63,9 +63,14 @@ public class GameActivity extends AppCompatActivity {
                 throw new UnsupportedOperationException(
                         "Unreachable action for button " + view.getId());
         }
-        //TODO: Animate (fade in-out) image change
-        img_player.setImageResource(imgResId);
-        img_player.setContentDescription(imgDesc);
+        AppAnimationUtils.animateImageViewChange(this, img_player, imgResId,
+                new AppAnimationUtils.InOutAnimationListener(){
+                    @Override public void onAnimationStart(Animation animation) { }
+                    @Override public void onAnimationEnd(Animation animation) {
+                        img_player.setContentDescription(imgDesc);
+                    }
+                }
+            );
 
         //TODO Fire game logic
     }
