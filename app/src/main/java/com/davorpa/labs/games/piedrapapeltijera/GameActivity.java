@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity {
 
+    ImageView img_player;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +20,7 @@ public class GameActivity extends AppCompatActivity {
         final TextView txt_username = findViewById(R.id.txt_username);
         txt_username.setText(getIntent().getStringExtra(MainActivity.EXTRA_USERNAME));
 
-        ImageView img_player = findViewById(R.id.img_player);
+        img_player = findViewById(R.id.img_player);
         img_player.setImageResource(R.drawable.icon_quest);
         img_player.setContentDescription(getString(R.string.lbl_thinking));
 
@@ -40,7 +42,32 @@ public class GameActivity extends AppCompatActivity {
      * @param view the button instance that fires the event
      */
     public void onPlayButton(final View view) {
-        Toast.makeText(this, R.string.lbl_todo, Toast.LENGTH_LONG).show();
+        // Sync player intent image
+        final int imgResId;
+        final String imgDesc;
+        switch (view.getId()) {
+            case R.id.btn_stone:
+                imgResId = R.drawable.icon_stone;
+                imgDesc = getString(R.string.lbl_stone);
+                break;
+            case R.id.btn_paper:
+                imgResId = R.drawable.icon_papper;
+                imgDesc = getString(R.string.lbl_paper);
+                break;
+            case R.id.btn_scissors:
+                imgResId = R.drawable.icon_scissors;
+                imgDesc = getString(R.string.lbl_scissors);
+                break;
+            default:
+                // Never should happen
+                throw new UnsupportedOperationException(
+                        "Unreachable action for button " + view.getId());
+        }
+        //TODO: Animate (fade in-out) image change
+        img_player.setImageResource(imgResId);
+        img_player.setContentDescription(imgDesc);
+
+        //TODO Fire game logic
     }
 
 }
