@@ -1,12 +1,14 @@
 package com.davorpa.labs.games.piedrapapeltijera;
 
-import androidx.annotation.IdRes;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -16,25 +18,35 @@ public class GameActivity extends AppCompatActivity {
 
     Game game = new Game();
 
+    volatile CountDownTimer countdown;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        // Capture the layout's components
         final TextView txt_username = findViewById(R.id.txt_username);
-        txt_username.setText(getIntent().getStringExtra(MainActivity.EXTRA_USERNAME));
-
         img_player = findViewById(R.id.img_player);
-        img_player.setImageResource(R.drawable.icon_quest);
-        img_player.setContentDescription(getString(R.string.lbl_thinking));
-
         img_machine = findViewById(R.id.img_machine);
-        img_machine.setImageResource(R.drawable.icon_quest);
-        img_machine.setContentDescription(getString(R.string.lbl_thinking));
-
         lbl_match_status = findViewById(R.id.lbl_match_status);
-        lbl_match_status.setText("");
+
+        // init this components
+        txt_username.setText(getIntent().getStringExtra(MainActivity.EXTRA_USERNAME));
+        setMatchStatusMessage("");
+        setPlayingImage(img_player, R.drawable.icon_quest);
+        setPlayingImage(img_machine, R.drawable.icon_quest);
     }
+
+    @Override
+    protected void onDestroy() {
+        if (countdown != null) {
+            countdown.cancel();
+        }
+        super.onDestroy();
+    }
+
 
     /**
      * Método que se ejecuta al pulsar el botón Back
@@ -44,23 +56,47 @@ public class GameActivity extends AppCompatActivity {
         onBackPressed();
     }
 
+
     /**
      * Método que se ejecuta al pulsar el botón Stone|Paper|Scissors
      * @param view the button instance that fires the event
      */
     public void onPlayButton(final View view) {
-        // Sync player intent image
+        // Set player option
         final Game.PlayRequest playerRequest = resolvePlayerRequest(view.getId());
         updateViewForPlayerRequest(playerRequest);
 
-        // Sync machine intent image
-        final Game.PlayRequest machineRequest = game.generateRandomPlayRequest();
-        updateViewForOpponentRequest(machineRequest);
+        synchronized (this) {
+            // Init opponent option
+            setPlayingImage(img_machine, R.drawable.icon_quest);
 
-        // Generate match result
-        Game.PlayResult playResult = game.computePlayResult(playerRequest, machineRequest);
-        updateViewForPlayResult(playResult);
+            // cancel last countdown before recreate it (use double race with volatile+synchronized)
+            if (countdown != null) {
+                countdown.cancel();
+            }
+            countdown = new CountDownTimer(3500, 1000) {
+                int number = 3;
+
+                @Override public void onTick(long millisUntilFinished) {
+                    setMatchStatusMessage(String.valueOf(number--));
+                }
+
+                @Override public void onFinish() {
+                    // Sync machine intent image
+                    final Game.PlayRequest machineRequest =
+                            game.generateRandomPlayRequest();
+                    updateViewForOpponentRequest(machineRequest);
+
+                    // Generate match result
+                    final Game.PlayResult playResult =
+                            game.computePlayResult(playerRequest, machineRequest);
+                    updateViewForPlayResult(playResult);
+                }
+            };
+            countdown.start();
+        }
     }
+
 
     private Game.PlayRequest resolvePlayerRequest(@IdRes int resId) {
         final Game.PlayRequest playerRequest;
@@ -82,68 +118,94 @@ public class GameActivity extends AppCompatActivity {
         return playerRequest;
     }
 
+
     private void updateViewForPlayerRequest(Game.PlayRequest request) {
-        int imgResId;
-        String imgDesc;
+        final int imgResId;
         switch (request) {
             case STONE:
                 imgResId = R.drawable.icon_stone;
-                imgDesc = getString(R.string.lbl_stone);
                 break;
             case PAPER:
                 imgResId = R.drawable.icon_papper;
-                imgDesc = getString(R.string.lbl_paper);
                 break;
             case SCISSORS:
                 imgResId = R.drawable.icon_scissors;
-                imgDesc = getString(R.string.lbl_scissors);
                 break;
             default:
                 // Never should happen
                 throw new UnsupportedOperationException(
                         "Unreachable action for player request " + request);
         }
-        img_player.setImageResource(imgResId);
-        img_player.setContentDescription(imgDesc);
+        setPlayingImage(img_player, imgResId);
     }
 
+
     private void updateViewForOpponentRequest(Game.PlayRequest request) {
-        int imgResId;
-        String imgDesc;
+        final int imgResId;
         switch (request) {
             case STONE:
                 imgResId = R.drawable.icon_stone;
-                imgDesc = getString(R.string.lbl_stone);
                 break;
             case PAPER:
                 imgResId = R.drawable.icon_papper;
-                imgDesc = getString(R.string.lbl_paper);
                 break;
             case SCISSORS:
                 imgResId = R.drawable.icon_scissors;
-                imgDesc = getString(R.string.lbl_scissors);
                 break;
             default:
                 // Never should happen
                 throw new UnsupportedOperationException(
                         "Unreachable action for opponent request " + request);
         }
-        img_machine.setImageResource(imgResId);
-        img_machine.setContentDescription(imgDesc);
+        setPlayingImage(img_machine, imgResId);
     }
+
+
+    private void setPlayingImage(
+            final ImageView image, final @DrawableRes int resId)
+    {
+        final String desc;
+        switch (resId) {
+            case R.drawable.icon_quest:
+                desc = getString(R.string.lbl_thinking);
+                break;
+            case R.drawable.icon_stone:
+                desc = getString(R.string.lbl_stone);
+                break;
+            case R.drawable.icon_papper:
+                desc = getString(R.string.lbl_paper);
+                break;
+            case R.drawable.icon_scissors:
+                desc = getString(R.string.lbl_scissors);
+                break;
+            default:
+                // Never should happen
+                throw new UnsupportedOperationException(
+                        "Unsupported playing image resource: " + resId);
+        }
+
+        image.setImageResource(resId);
+        image.setContentDescription(desc);
+    }
+
 
     private void updateViewForPlayResult(Game.PlayResult playResult) {
         switch (playResult) {
             case PLAYER:
-                lbl_match_status.setText(R.string.lbl_win);
+                setMatchStatusMessage(getString(R.string.lbl_win));
                 break;
             case OPPONENT:
-                lbl_match_status.setText(R.string.lbl_loose);
+                setMatchStatusMessage(getString(R.string.lbl_loose));
                 break;
             case DRAW:
-                lbl_match_status.setText(R.string.lbl_draw);
+                setMatchStatusMessage(getString(R.string.lbl_draw));
                 break;
         }
+    }
+
+
+    private void setMatchStatusMessage(final CharSequence text) {
+        lbl_match_status.setText(text);
     }
 
 }
