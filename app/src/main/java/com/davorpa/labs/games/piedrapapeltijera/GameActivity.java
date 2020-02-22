@@ -90,7 +90,7 @@ public class GameActivity extends AppCompatActivity {
     {
         // Set player current option
         playerRequest = helper.resolvePlayRequestFromResourceId(view.getId());
-        updateViewForPlayerRequest(playerRequest, null);
+        updateViewForPlayerRequest(playerRequest, () -> {});
 
         synchronized (this) {
             // Allow change option while play buttons are available
@@ -102,6 +102,7 @@ public class GameActivity extends AppCompatActivity {
             // Set opponent current option
             opponentRequest = game.generateRandomPlayRequest();
 
+            // countdown animation
             playingCountdown = new PlayingCountDown(3) {
                 @Override public void onStart(final int value) {
                     // Clear last play result
