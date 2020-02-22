@@ -17,9 +17,13 @@
     <string name="lbl_scissors">Scissors</string>
     <string name="lbl_vs">vs.</string>
     <string name="lbl_thinking">Thinking…</string>
+    <string name="lbl_go">Go!</string>
     <string name="lbl_win">You Win!</string>
     <string name="lbl_draw">Draw!</string>
     <string name="lbl_loose">You Loose!</string>
+    <string name="stone_brokes_scissors">Stones broke scissors</string>
+    <string name="paper_wraps_stones">Papers wrap stones</string>
+    <string name="scissor_cuts_papers">Scissors cut papers</string>
     
     <string name="err_required">Required</string>
 </resources>

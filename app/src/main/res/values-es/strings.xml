@@ -19,4 +19,8 @@
     <string name="lbl_you">Tú</string>
     <string name="lbl_your_username">Tu nombre de usuario</string>
     <string name="the_game">¡¡El juego!!</string>
+    <string name="lbl_go">¡Vamos!</string>
+    <string name="paper_wraps_stones">El papel envuelve a la piedra</string>
+    <string name="scissor_cuts_papers">Las tijeras cortan el papel</string>
+    <string name="stone_brokes_scissors">Las piedras rompen las tijeras</string>
 </resources>
