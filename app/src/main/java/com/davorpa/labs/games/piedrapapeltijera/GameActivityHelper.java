@@ -95,7 +95,7 @@ class GameActivityHelper
             case STONE:
                 return R.drawable.icon_stone;
             case PAPER:
-                return R.drawable.icon_papper;
+                return R.drawable.icon_paper;
             case SCISSORS:
                 return R.drawable.icon_scissors;
         }
@@ -150,7 +150,7 @@ class GameActivityHelper
                 return activity.getString(R.string.lbl_thinking);
             case R.drawable.icon_stone:
                 return activity.getString(R.string.lbl_stone);
-            case R.drawable.icon_papper:
+            case R.drawable.icon_paper:
                 return activity.getString(R.string.lbl_paper);
             case R.drawable.icon_scissors:
                 return activity.getString(R.string.lbl_scissors);
