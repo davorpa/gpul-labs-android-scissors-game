@@ -43,9 +43,9 @@ class GameActivityHelper
         }
 
         final Animation anim_out = AnimationUtils.loadAnimation(
-                activity, android.R.anim.fade_out);
+                activity, R.anim.fade_out);
         final Animation anim_in = AnimationUtils.loadAnimation(
-                activity, android.R.anim.fade_in);
+                activity, R.anim.fade_in);
         anim_out.setAnimationListener(new Animation.AnimationListener()
         {
             @Override public void onAnimationStart(Animation animation) {}

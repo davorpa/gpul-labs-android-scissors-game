@@ -41,20 +41,20 @@
         app:constraint_referenced_ids="lbl_match_status,lbl_match_status_desc" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/grp_opponent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:constraint_referenced_ids="lbl_your_opponent,img_opponent" />
-
-    <androidx.constraintlayout.widget.Group
         android:id="@+id/grp_player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="lbl_you,txt_username,img_player" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/grp_opponent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="lbl_your_opponent,img_opponent" />
+
     <TextView
         android:id="@+id/lbl_you"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/config_play_image_width"
         android:layout_height="wrap_content"
         android:text="@string/lbl_you"
         android:textAlignment="center"
@@ -63,8 +63,8 @@
 
     <TextView
         android:id="@+id/txt_username"
-        android:layout_width="150dp"
-        android:layout_height="19dp"
+        android:layout_width="@dimen/config_play_image_width"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:textAlignment="center"
@@ -76,7 +76,7 @@
 
     <TextView
         android:id="@+id/lbl_your_opponent"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/config_play_image_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/lbl_the_machine"
@@ -86,8 +86,8 @@
 
     <ImageView
         android:id="@+id/img_player"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/config_play_image_width"
+        android:layout_height="@dimen/config_play_image_height"
         android:layout_marginStart="16dp"
         android:contentDescription="@string/lbl_thinking"
         android:scaleType="centerInside"
@@ -97,8 +97,8 @@
 
     <ImageView
         android:id="@+id/img_opponent"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/config_play_image_width"
+        android:layout_height="@dimen/config_play_image_height"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:contentDescription="@string/lbl_thinking"
