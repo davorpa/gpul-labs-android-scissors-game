@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Group;
 
@@ -43,9 +45,9 @@ public class GameActivity extends AppCompatActivity {
         // Init this components
         //
 
-        //set playerName by text provided from the entrant intent
+        // set playerName by text provided from the entrant intent
         txt_username.setText(getIntent().getStringExtra(MainActivity.EXTRA_USERNAME));
-        //clear play result
+        // clear play result
         updateViewForPlayResult(null);
         // clear game images
         helper.setPlayingImage(img_player, R.drawable.icon_quest);
@@ -72,6 +74,7 @@ public class GameActivity extends AppCompatActivity {
     public void onBackButton(
             final View view)
     {
+        // Do the same android back button does
         onBackPressed();
     }
 
@@ -93,7 +96,7 @@ public class GameActivity extends AppCompatActivity {
         updateViewForPlayerRequest(playerRequest, () -> {});
 
         synchronized (this) {
-            // Allow change option while play buttons are available
+            // Allow change option while play buttons are available (synchronized + volatile)
             if (playingBlocked) {
                 return;
             }
@@ -102,7 +105,7 @@ public class GameActivity extends AppCompatActivity {
             // Set opponent current option
             opponentRequest = game.generateRandomPlayRequest();
 
-            // countdown animation
+            // Countdown animation
             playingCountdown = new PlayingCountDown(3) {
                 @Override public void onStart(final int value) {
                     // Clear last play result
@@ -113,8 +116,10 @@ public class GameActivity extends AppCompatActivity {
 
                 @Override public void onTick(final int value) {
                     if (value == 2) {
+                        // Disable play buttons
                         enablePlayButtons(false);
                     }
+                    // Set countdown number on UI
                     setMatchStatusMessage(value < 1
                             ? getString(R.string.lbl_go)
                             : String.valueOf(value));
@@ -126,10 +131,13 @@ public class GameActivity extends AppCompatActivity {
                     final Game.ComputedPlayResult playResult =
                             game.computePlayResult(playerRequest, opponentRequest);
 
+                    // Set opponent option on UI
                     updateViewForOpponentRequest(
                             opponentRequest,
                             () -> {
+                                // Set play result on UI
                                 updateViewForPlayResult(playResult);
+                                // Enable play buttons
                                 enablePlayButtons(true);
                                 playingBlocked = false;
                             }
@@ -140,6 +148,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Enable or disable player play option UI buttons.
+     * @param enabled <tt>true</tt> for enable buttons
+     */
     private void enablePlayButtons(
             final boolean enabled)
     {
@@ -148,50 +160,73 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Performs the UI update with the player play option.
+     * @param request the player play option.
+     * @param onAnimationEnd optional callback to execute when change animation ends.
+     */
     private void updateViewForPlayerRequest(
-            final Game.PlayRequest request,
-            final Runnable onAnimationEnd)
+            final @NonNull Game.PlayRequest request,
+            final @Nullable Runnable onAnimationEnd)
     {
         final int imgResId = helper.resolveDrawableFromPlayRequest(request);
         helper.setPlayingImage(img_player, imgResId, onAnimationEnd);
     }
 
 
+    /**
+     * Performs the UI update with the opponent play option.
+     * @param request the opponent play option.
+     * @param onAnimationEnd optional callback to execute when change animation ends.
+     */
     private void updateViewForOpponentRequest(
-            final Game.PlayRequest request,
-            final Runnable onAnimationEnd)
+            final @NonNull Game.PlayRequest request,
+            final @Nullable Runnable onAnimationEnd)
     {
         final int imgResId = helper.resolveDrawableFromPlayRequest(request);
         helper.setPlayingImage(img_opponent, imgResId, onAnimationEnd);
     }
 
 
+    /**
+     * Performs the UI update with the final play result.
+     * @param result the play result.
+     */
     private void updateViewForPlayResult(
-            final Game.ComputedPlayResult playResult)
+            final @NonNull Game.ComputedPlayResult result)
     {
-        if (playResult == null) {
+        if (result == null) {
             setMatchStatusMessage(null);
             setMatchStatusDescription(null);
             return;
         }
 
         setMatchStatusMessage(
-                helper.resolvePlayResultSubject(playResult.who)
+                helper.resolvePlayResultSubject(result.who)
             );
         setMatchStatusDescription(
-                helper.resolvePlayResultReason(playResult.reason)
+                helper.resolvePlayResultReason(result.reason)
             );
     }
 
 
+    /**
+     * Set text into the UI control that manage play status.
+     * @param text the text to set.
+     */
     private void setMatchStatusMessage(
-            final CharSequence text)
+            final @Nullable CharSequence text)
     {
         lbl_match_status.setText(text);
     }
 
+
+    /**
+     * Set text into the UI control that manage play status explanation.
+     * @param text the text to set, <tt>null</tt> to hide it.
+     */
     private void setMatchStatusDescription(
-            final CharSequence text)
+            final @Nullable CharSequence text)
     {
         lbl_match_status_desc.setVisibility(text == null || text.length() == 0
                 ? View.GONE

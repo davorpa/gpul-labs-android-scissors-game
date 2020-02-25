@@ -5,14 +5,23 @@ import androidx.annotation.NonNull;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * Game logic.
+ */
 public class Game {
 
+    /**
+     * Enumeration that holds the play status.
+     */
     public enum PlayResult {
         PLAYER,
         DRAW,
         OPPONENT
     }
 
+    /**
+     * Enumeration that holds the play options.
+     */
     public enum PlayRequest {
         STONE,
         PAPER,
@@ -20,8 +29,9 @@ public class Game {
     }
 
 
-
-
+    /**
+     * Value object to encapsulate a play result with who wins and the reason.
+     */
     public static final class ComputedPlayResult
     {
         public final PlayResult who;
@@ -82,6 +92,10 @@ public class Game {
 
     private Random random = new Random();
 
+    /**
+     * Generate a random play option to use for example as a machine play option.
+     * @return a random game play option.
+     */
     public PlayRequest generateRandomPlayRequest()
     {
         PlayRequest[] values = PlayRequest.values();
@@ -90,15 +104,22 @@ public class Game {
     }
 
 
-
+    /**
+     * Compute game play result.
+     * @param player player play option.
+     * @param opponent opponent play option.
+     * @return the game play result.
+     */
     public @NonNull ComputedPlayResult computePlayResult(
             final @NonNull PlayRequest player,
             final @NonNull PlayRequest opponent)
     {
+        // nobody wins if same request value
         if (player == opponent) {
             return new ComputedPlayResult(PlayResult.DRAW, null);
         }
 
+        // compute the winner
         PlayResult winner = (
                 (PlayRequest.STONE.equals(player) && PlayRequest.SCISSORS.equals(opponent)) ||
                 (PlayRequest.PAPER.equals(player) && PlayRequest.STONE.equals(opponent)) ||
@@ -107,6 +128,7 @@ public class Game {
             ? PlayResult.PLAYER
             : PlayResult.OPPONENT;
 
+        // compute the reason why winner wins
         PlayRequest reason = null;
         if (
                 (PlayRequest.STONE.equals(player) && PlayRequest.SCISSORS.equals(opponent)) ||

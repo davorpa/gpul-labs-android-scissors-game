@@ -1,13 +1,13 @@
 package com.davorpa.labs.games.piedrapapeltijera;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     * Método que se ejecuta al pulsar el botón Play
-     * @param view
+     * Event callback executed when Play button is clicked
+     * @param view the button instance that fires the event
      */
     public void onPlayClick(final View view) {
         // Capture the layout's components

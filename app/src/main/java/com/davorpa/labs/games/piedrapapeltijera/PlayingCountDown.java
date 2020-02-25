@@ -10,6 +10,10 @@ public abstract class PlayingCountDown {
     private final CountDownTimer delegate;
     private AtomicInteger current;
 
+    /**
+     * Builds a new playing countdown.
+     * @param fromValue a value greater than zero.
+     */
     public PlayingCountDown(int fromValue) {
         this.fromValue = fromValue;
         this.current = new AtomicInteger(fromValue);

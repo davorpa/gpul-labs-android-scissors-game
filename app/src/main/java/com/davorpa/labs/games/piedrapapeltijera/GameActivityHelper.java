@@ -9,6 +9,9 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+/**
+ * Helper class to bridge/translate game UI with their respective game logic.
+ */
 class GameActivityHelper
 {
     final GameActivity activity;
@@ -21,6 +24,11 @@ class GameActivityHelper
     }
 
 
+    /**
+     * Change the image source to a target image.
+     * @param image image view to manage.
+     * @param resId the target drawable resource identifier to set.
+     */
     void setPlayingImage(
             final @NonNull ImageView image,
             final @DrawableRes int resId)
@@ -28,7 +36,13 @@ class GameActivityHelper
         setPlayingImage(image, resId, null);
     }
 
-
+    /**
+     * Change the image source doing a fade animation between current and target image.
+     * @param image image view to manage.
+     * @param resId the target drawable resource identifier to set.
+     * @param onAnimationEnd optional callback to execute when animation ends,
+     *                       if <tt>null</tt> no animation is done.
+     */
     void setPlayingImage(
             final @NonNull ImageView image,
             final @DrawableRes int resId,
@@ -68,6 +82,12 @@ class GameActivityHelper
     }
 
 
+    /**
+     * Resolve/translate the {@link com.davorpa.labs.games.piedrapapeltijera.Game.PlayRequest}
+     * game object from their UI id.
+     * @param resId the view identifier.
+     * @return
+     */
     @NonNull
     Game.PlayRequest resolvePlayRequestFromResourceId(
             final @IdRes int resId)
@@ -86,6 +106,13 @@ class GameActivityHelper
     }
 
 
+    /**
+     * Resolve/translate the drawable id
+     * from their {@link com.davorpa.labs.games.piedrapapeltijera.Game.PlayRequest}
+     * game object.
+     * @param request the game object to inspect.
+     * @return the drawable identifier.
+     */
     @NonNull
     @DrawableRes
     int resolveDrawableFromPlayRequest(
@@ -105,6 +132,13 @@ class GameActivityHelper
     }
 
 
+    /**
+     * Gets the UI message to text the game status reason
+     * that match with the given
+     * {@link com.davorpa.labs.games.piedrapapeltijera.Game.PlayRequest} game object.
+     * @param reason the game object to inspect.
+     * @return the string value message.
+     */
     @Nullable
     String resolvePlayResultReason(
             final @Nullable Game.PlayRequest reason)
@@ -123,6 +157,13 @@ class GameActivityHelper
     }
 
 
+    /**
+     * Gets the UI message to text the game status
+     * that match with the given
+     * {@link com.davorpa.labs.games.piedrapapeltijera.Game.PlayResult} game object.
+     * @param who the game object to inspect.
+     * @return the string value message.
+     */
     @Nullable
     String resolvePlayResultSubject(
             final @Nullable Game.PlayResult who)
@@ -141,6 +182,12 @@ class GameActivityHelper
     }
 
 
+    /**
+     * Gets the UI description to text the game status
+     * that hint the given image resource identifier.
+     * @param resId the drawable identifier.
+     * @return the string value hint.
+     */
     @NonNull
     String getDescriptionForResourcePlayIconId(
             final @DrawableRes int resId)
