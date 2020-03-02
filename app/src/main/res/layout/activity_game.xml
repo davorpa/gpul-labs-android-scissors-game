@@ -50,7 +50,7 @@
         android:id="@+id/grp_opponent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="lbl_your_opponent,img_opponent" />
+        app:constraint_referenced_ids="lbl_your_opponent,txt_opponent,img_opponent" />
 
     <TextView
         android:id="@+id/lbl_you"
@@ -79,10 +79,24 @@
         android:layout_width="@dimen/config_play_image_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/lbl_the_machine"
+        android:text="@string/lbl_your_opponent"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="@+id/img_opponent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_opponent"
+        android:layout_width="@dimen/config_play_image_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/lbl_the_machine"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/img_opponent"
+        app:layout_constraintStart_toStartOf="@id/lbl_your_opponent"
+        app:layout_constraintTop_toBottomOf="@id/lbl_your_opponent" />
 
     <ImageView
         android:id="@+id/img_player"

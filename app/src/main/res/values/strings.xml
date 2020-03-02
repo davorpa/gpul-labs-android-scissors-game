@@ -11,6 +11,7 @@
     <string name="lbl_todo" translatable="false">TODO!</string>
     <string name="lbl_your_username">Your Username</string>
     <string name="lbl_you">You</string>
+    <string name="lbl_your_opponent">Your opponent</string>
     <string name="lbl_the_machine">The machine</string>
     <string name="lbl_paper">Paper</string>
     <string name="lbl_stone">Stone</string>

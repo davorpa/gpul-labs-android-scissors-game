@@ -23,4 +23,5 @@
     <string name="paper_wraps_stones">El papel envuelve a la piedra</string>
     <string name="scissor_cuts_papers">Las tijeras cortan el papel</string>
     <string name="stone_brokes_scissors">Las piedras rompen las tijeras</string>
+    <string name="lbl_your_opponent">Tu oponente</string>
 </resources>
