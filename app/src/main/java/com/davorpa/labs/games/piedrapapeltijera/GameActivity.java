@@ -2,6 +2,7 @@ package com.davorpa.labs.games.piedrapapeltijera;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,15 +11,23 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Group;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
 public class GameActivity extends AppCompatActivity {
 
     private static final String TAG  = "GameActivity";
 
-    ImageView img_player;
-    ImageView img_opponent;
-    TextView lbl_match_status;
-    TextView lbl_match_status_desc;
-    Group grp_play_buttons;
+
+    @BindView(R.id.txt_username) TextView txt_username;
+    @BindView(R.id.img_player) ImageView img_player;
+    @BindView(R.id.img_opponent) ImageView img_opponent;
+    @BindView(R.id.lbl_match_status) TextView lbl_match_status;
+    @BindView(R.id.lbl_match_status_desc) TextView lbl_match_status_desc;
+    @BindView(R.id.grp_play_buttons) Group grp_play_buttons;
+    Unbinder unbinder;
 
     GameActivityHelper helper = new GameActivityHelper(this);
     Game game = new Game();
@@ -32,14 +41,9 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         //
-        // Capture the layout's components
+        // Capture the layout's components handled by ButterKnife annotations
         //
-        final TextView txt_username = findViewById(R.id.txt_username);
-        img_player = findViewById(R.id.img_player);
-        img_opponent = findViewById(R.id.img_opponent);
-        lbl_match_status = findViewById(R.id.lbl_match_status);
-        lbl_match_status_desc = findViewById(R.id.lbl_match_status_desc);
-        grp_play_buttons = findViewById(R.id.grp_play_buttons);
+        unbinder = ButterKnife.bind(this);
 
         //
         // Init this components
@@ -64,6 +68,7 @@ public class GameActivity extends AppCompatActivity {
         playingBlocked = false;
 
         super.onDestroy();
+        unbinder.unbind();
     }
 
 
@@ -71,6 +76,7 @@ public class GameActivity extends AppCompatActivity {
      * Event callback executed when Back button is clicked
      * @param view the button instance that fires the event
      */
+    @OnClick({R.id.btn_back})
     public void onBackButton(
             final View view)
     {
@@ -86,13 +92,14 @@ public class GameActivity extends AppCompatActivity {
 
     /**
      * Event callback executed when Stone|Paper|Scissors button is clicked
-     * @param view the button instance that fires the event
+     * @param btn the button instance that fires the event
      */
+    @OnClick({R.id.btn_stone, R.id.btn_paper, R.id.btn_scissors})
     public void onPlayButton(
-            final View view)
+            final Button btn)
     {
         // Set player current option
-        playerRequest = helper.resolvePlayRequestFromResourceId(view.getId());
+        playerRequest = helper.resolvePlayRequestFromResourceId(btn.getId());
         updateViewForPlayerRequest(playerRequest, () -> {});
 
         synchronized (this) {

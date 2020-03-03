@@ -9,9 +9,18 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
 public class MainActivity extends AppCompatActivity {
 
     static final String EXTRA_USERNAME =  BuildConfig.APPLICATION_ID + ".USERNAME";
+
+
+    @BindView(R.id.txt_username) EditText txt_username;
+    Unbinder unbinder;
 
 
     @Override
@@ -19,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Capture the layout's components
-        final EditText txt_username = findViewById(R.id.txt_username);
+        //
+        // Capture the layout's components handled by ButterKnife annotations
+        //
+        unbinder = ButterKnife.bind(this);
 
         //Init view with values provided by parent intent
         final String username = getIntent().getStringExtra(MainActivity.EXTRA_USERNAME);
@@ -31,15 +42,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        unbinder.unbind();
+    }
+
 
     /**
      * Event callback executed when Play button is clicked
      * @param view the button instance that fires the event
      */
+    @OnClick({R.id.btn_play, R.id.lbl_play})
     public void onPlayClick(final View view) {
-        // Capture the layout's components
-        final EditText txt_username = findViewById(R.id.txt_username);
-
         // TODO: Find user in last players to set current user in game
         // validate username
         final String username = txt_username.getText().toString();
